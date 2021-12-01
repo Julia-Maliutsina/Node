@@ -6,7 +6,7 @@ const PORT = process.env.PORT ?? 3000;
 app.use(express.json());
 
 app.get('/api/greetings', (request, response) => {
-  const name = request.body.name;
+  const name = request.query.name;
   name ?
   response.send(`<p>Hello ${name}!</p>`)
   : response.status(400).json({ error: 'Name undefined' })
