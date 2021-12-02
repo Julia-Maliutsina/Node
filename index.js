@@ -14,7 +14,7 @@ app.get('/api/greetings', (request, response) => {
 
 app.route('/api/notes')
 .get((request, response) => {
-  response.send([2]);
+  response.send([]);
 })
 .post((request, response) => {
   response.send(request.body);
