@@ -37,7 +37,7 @@ app.route('/api/notes/:id')
     id: noteId,
     title: request.body.title,
     content: request.body.content,
-    createdAt: request.body.content,
+    createdAt: request.body.createdAt,
     updatedAt: request.body.updatedAt,    
   };
   const {error} = validateUpdateNote(putNoteResponse);
