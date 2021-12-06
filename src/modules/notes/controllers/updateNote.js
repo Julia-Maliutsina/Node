@@ -1,5 +1,5 @@
 import { validateUpdateNote } from "../../../validation/putNote.js";
-import Notes from "./dbModel.js";
+import Notes from "./noteModel.js";
 
 const ERROR_STATUS = 400;
 

@@ -1,6 +1,6 @@
 import { validateNewNote } from "../../../validation/postNote.js";
 import mongoose from "mongoose";
-import Notes from "./dbModel.js";
+import Notes from "./noteModel.js";
 
 const ERROR_STATUS = 400;
 let date = new Date();

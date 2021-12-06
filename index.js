@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import routerGreetings from "./src/modules/greetings/routes/index.js";
 import routerNotes from "./src/modules/notes/routes/index.js";
+import routerUsers from "./src/modules/users/routes/index.js";
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api", routerGreetings);
 app.use("/api", routerNotes);
+app.use("/api", routerUsers);
 
 app.use((request, response, next) => {
 	const err = new Error("Not found");

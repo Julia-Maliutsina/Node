@@ -22,9 +22,11 @@
   "homepage": "https://github.com/Julia-Maliutsina/Node#readme",
   "dependencies": {
     "@types/express": "^4.17.13",
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
     "joi": "^17.5.0",
     "mongoose": "^6.0.14",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "passport-jwt": "^4.0.0"
   }
 }

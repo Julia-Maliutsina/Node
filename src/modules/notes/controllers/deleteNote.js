@@ -1,4 +1,4 @@
-import Notes from "./dbModel.js";
+import Notes from "./noteModel.js";
 
 const DeleteNoteController = (request, response, next) => {
 	const noteId = request.params.id;

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Notes from "./dbModel.js";
+import Notes from "./noteModel.js";
 
 const NOTES_MAX = 10;
 
