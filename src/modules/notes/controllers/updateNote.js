@@ -13,26 +13,20 @@ const UpdateNoteController = (request, response, next) => {
 		content: request.body.content,
 		updatedAt: dateIso,
 	};
-	const { error } = validateUpdateNote(PUT_NOTE);
+	const {error} = validateUpdateNote(PUT_NOTE);
 	if (error) {
 		const err = new Error(error.details[0].message);
 		err.status = ERROR_STATUS;
 		next(err);
-	} else {
-		Notes.updateOne(
-			{ _id: PUT_NOTE.id },
-			{
-				content: PUT_NOTE.content,
-				title: PUT_NOTE.title,
-				updatedAt: dateIso,
-			}
-		)
-			.then((result) => {
-				response.send(PUT_NOTE);
-			})
-			.catch((error) => {
-				next(new Error(error));
-			});
+	} 
+	else {
+		Notes.updateOne({ _id: PUT_NOTE.id }, {content: PUT_NOTE.content,title: PUT_NOTE.title, updatedAt: dateIso,})
+		.then((result) => {
+			response.send(PUT_NOTE);
+		})
+		.catch((error) => {
+			next(new Error(error));
+		});
 	}
 };
 

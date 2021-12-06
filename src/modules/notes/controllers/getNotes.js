@@ -19,36 +19,36 @@ const GetNotesController = (request, response, next) => {
 	}
 	if (title) {
 		Notes.find({ title: title })
-			.limit(NOTES_MAX)
-			.skip((page - 1) * NOTES_MAX)
-			.then((notesArray) => {
-				response.send(notesArray);
-			})
-			.catch((error) => {
-				next(new Error(error));
-			});
+		.limit(NOTES_MAX)
+		.skip((page - 1) * NOTES_MAX)
+		.then((notesArray) => {
+			response.send(notesArray);
+		})
+		.catch((error) => {
+			next(new Error(error));
+		});
 		return;
 	}
 	if (date) {
 		Notes.find({ createdAt: date })
-			.limit(NOTES_MAX)
-			.skip((page - 1) * NOTES_MAX)
-			.then((notesArray) => {
-				response.send(notesArray);
-			})
-			.catch((error) => {
-				next(new Error(error));
-			});
+		.limit(NOTES_MAX)
+		.skip((page - 1) * NOTES_MAX)
+		.then((notesArray) => {
+			response.send(notesArray);
+		})
+		.catch((error) => {
+			next(new Error(error));
+		});
 	} else {
 		Notes.find()
-			.limit(NOTES_MAX)
-			.skip((page - 1) * NOTES_MAX)
-			.then((notesArray) => {
-				response.send(notesArray);
-			})
-			.catch((error) => {
-				next(new Error(error));
-			});
+		.limit(NOTES_MAX)
+		.skip((page - 1) * NOTES_MAX)
+		.then((notesArray) => {
+			response.send(notesArray);
+		})
+		.catch((error) => {
+			next(new Error(error));
+		});
 	}
 };
 

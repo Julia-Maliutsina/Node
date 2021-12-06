@@ -31,19 +31,18 @@ app.use((err, request, response, next) => {
 
 async function start() {
 	try {
-		await mongoose.connect(
-			"mongodb+srv://julia_maliutsina:q1w2e3r4@cluster0.ccww9.mongodb.net/my-notes-app",
-			{
-				useNewUrlParser: true,
-				useUnifiedTopology: true,
-			}
-		);
+		await mongoose.connect( "mongodb+srv://julia_maliutsina:q1w2e3r4@cluster0.ccww9.mongodb.net/my-notes-app",
+		{
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+		});
 		app.listen(PORT, () => {
 			console.log(
 				`Server has been started on port ${PORT} ...`
 			);
 		});
-	} catch (error) {
+	} 
+	catch (error) {
 		console.log(error);
 	}
 }
