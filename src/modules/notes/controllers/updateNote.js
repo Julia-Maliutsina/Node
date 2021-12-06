@@ -11,6 +11,7 @@ const UpdateNoteController = (request, response, next) => {
 		id: request.params.id,
 		title: request.body.title,
 		content: request.body.content,
+		updatedAt: dateIso,
 	};
 	const { error } = validateUpdateNote(PUT_NOTE);
 	if (error) {
