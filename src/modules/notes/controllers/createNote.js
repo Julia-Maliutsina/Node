@@ -12,18 +12,19 @@ const CreateNoteController = (request, response, next) => {
 		const err = new Error(error.details[0].message);
 		err.status = ERROR_STATUS;
 		next(err);
-	}
-	Notes.create({
-		content: request.body.content,
-		title: request.body.title,
-		createdAt: dateIso,
-	})
-		.then((note) => {
-			response.send(note);
+	} else {
+		Notes.create({
+			content: request.body.content,
+			title: request.body.title,
+			createdAt: dateIso,
 		})
-		.catch((error) => {
-			next(new Error(error));
-		});
+			.then((note) => {
+				response.send(note);
+			})
+			.catch((error) => {
+				next(new Error(error));
+			});
+	}
 };
 
 export default CreateNoteController;
