@@ -1,7 +1,7 @@
+import bcrypt from "bcryptjs";
 import { validateUser } from "../../../validation/postUser.js";
-import mongoose from "mongoose";
-import Users from "./userModel.js";
-import bcrypt from "bcryptjs"
+import create from "../../../helpers/createToken.js"
+import Users from "../models/UserModel.js";
 
 const ERROR_STATUS = 400;
 const ERROR_EMAIL = "User with this email doesn't exist";
@@ -31,7 +31,9 @@ const AuthorizeController = async (request, response, next) => {
 			next(err);
 			return;	
     }
-		response.status(401).json("Signed in successfully")
+		const token = create.token(user);
+		const refreshToken = create.refreshToken(user);
+		response.status(200).json({token: token, refreshToken: refreshToken});
 	}
 	catch(error){
 		next(new Error(error));

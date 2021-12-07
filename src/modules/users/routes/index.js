@@ -5,5 +5,6 @@ const routerUsers = new Router();
 
 routerUsers.post('/register', UsersControllers.postUser);
 routerUsers.post('/login', UsersControllers.authorizeUser);
+routerUsers.post('/login/refresh', UsersControllers.refresh);
 
 export default routerUsers;

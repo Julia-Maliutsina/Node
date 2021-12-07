@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import routerGreetings from "./src/modules/greetings/routes/index.js";
 import routerNotes from "./src/modules/notes/routes/index.js";
 import routerUsers from "./src/modules/users/routes/index.js";
+import passport from "passport";
+import passportFindUser from "./passport.js";
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
@@ -12,8 +14,12 @@ const ERROR_SERVER = 500;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api", routerGreetings);
-app.use("/api", routerNotes);
 app.use("/api", routerUsers);
+start();
+app.use(passport.initialize());
+passportFindUser(passport);
+app.use("/api", routerNotes);
+
 
 app.use((request, response, next) => {
 	const err = new Error("Not found");
@@ -49,4 +55,4 @@ async function start() {
 	}
 }
 
-start();
+
