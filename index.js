@@ -1,10 +1,13 @@
 import express from "express";
 import mongoose from "mongoose";
+import dotenv from 'dotenv';
 import routerGreetings from "./src/modules/greetings/routes/index.js";
 import routerNotes from "./src/modules/notes/routes/index.js";
 import routerUsers from "./src/modules/users/routes/index.js";
 import passport from "passport";
-import passportFindUser from "./passport.js";
+import passportFindUser from "./src/passport.js";
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
@@ -39,7 +42,7 @@ app.use((err, request, response, next) => {
 
 async function start() {
 	try {
-		await mongoose.connect( "mongodb+srv://julia_maliutsina:q1w2e3r4@cluster0.ccww9.mongodb.net/my-notes-app",
+		await mongoose.connect(process.env.DATABASE_PATH,
 		{
 			useNewUrlParser: true,
 			useUnifiedTopology: true,

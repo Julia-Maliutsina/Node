@@ -1,45 +1,40 @@
 import { validateUpdateNote } from "../../../validation/putNote.js";
 import Notes from "../models/NoteModel.js";
-
-const ERROR_STATUS = 400;
-const ERROR_NO_MATCHES = "Note not found";
+import { ERROR_MESSAGES, ERROR_STATUSES } from "../../../constants.js"
 
 let date = new Date();
 const dateIso = date.toISOString();
 
-const UpdateNoteController = (request, response, next) => {
+const UpdateNoteController = async (request, response, next) => {
 	if (!request.user._id) {
-		const err = new Error("Unauthorized");
-		err.status = 403;
+		const err = new Error(ERROR_MESSAGES.noToken);
+		err.status = ERROR_STATUSES.unauthorized;
 	}
-	const USER = request.user._id;
-	const PUT_NOTE = {
+	const user = request.user._id;
+	const putNote = {
 		id: request.params.id,
 		title: request.body.title,
 		content: request.body.content,
 		updatedAt: dateIso
 	};
-	const {error} = validateUpdateNote(PUT_NOTE);
+	const {error} = validateUpdateNote(putNote);
 	if (error) {
 		const err = new Error(error.details[0].message);
-		err.status = ERROR_STATUS;
+		err.status = ERROR_STATUSES.badRequest;
 		next(err);
-	} 
-	else {
-		Notes.updateOne({ _id: PUT_NOTE.id, user: USER }, {content: PUT_NOTE.content,title: PUT_NOTE.title, updatedAt: dateIso })
-		.then((result) => {
-			if (result.matchedCount > 0) {
-			  response.send(PUT_NOTE);
-			}
-      else {
-				const err = new Error(ERROR_NO_MATCHES);
-				err.status = ERROR_STATUS;
+	} else {
+		try {
+		  const result = await Notes.updateOne({ _id: putNote.id, user: user }, {content: putNote.content,title: putNote.title, updatedAt: dateIso });
+			if (result.matchedCount) {
+			  response.send(putNote);
+			} else {
+				const err = new Error(ERROR_MESSAGES.noMatchNotes);
+				err.status = ERROR_STATUSES.badRequest;
 				next(err);
 			}
-		})
-		.catch((error) => {
+		}	catch(error) {
 			next(new Error(error));
-		});
+		};
 	}
 };
 

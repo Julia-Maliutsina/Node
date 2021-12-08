@@ -1,15 +1,15 @@
 import jsonwebtoken from 'jsonwebtoken';
-import KEYS from '../config/keys.js';
+import { ERROR_MESSAGES, ERROR_STATUSES } from '../constants.js';
 
 const verifyRefreshToken = (refreshToken) => {
   return new Promise ((resolve, reject) => {
     jsonwebtoken.verify(
       refreshToken,
-      KEYS.refresh,
+      process.env.JWT_SECRET,
       (error, payload) => {
         if (error) {
-          const err = new Error("Unauthorized");
-          err.status = 403;
+          const err = new Error(ERROR_MESSAGES.noToken);
+          err.status = ERROR_STATUSES.unauthorized;
           return reject(err);
         }
         const userId = payload.userId;

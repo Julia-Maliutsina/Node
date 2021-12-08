@@ -1,11 +1,13 @@
-import KEYS from './src/config/keys.js';
 import mongoose from 'mongoose';
-import Users from './src/modules/users/models/UserModel.js';
+import Users from './modules/users/models/UserModel.js';
 import { Strategy, ExtractJwt } from 'passport-jwt';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const options = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: KEYS.jwt
+  secretOrKey: process.env.JWT_SECRET,
 }
 
 const passportFindUser = (passport) => {

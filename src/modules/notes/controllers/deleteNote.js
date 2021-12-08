@@ -1,34 +1,30 @@
 import Notes from "../models/NoteModel.js";
+import { ERROR_MESSAGES, ERROR_STATUSES } from "../../../constants.js"
 
-const ERROR_STATUS = 400;
-const ERROR_NO_MATCHES = "Note not found";
-
-const DeleteNoteController = (request, response, next) => {
+const DeleteNoteController = async (request, response, next) => {
 	if (!request.user._id) {
-		const err = new Error("Unauthorized");
-		err.status = 403;
+		const err = new Error(ERROR_MESSAGES.noToken);
+		err.status = ERROR_STATUSES.unauthorized;
 		next(err)
 	}
-	const NOTE_ID = request.params.id;
-  const USER = request.user._id;
-	Notes.deleteOne({ _id: NOTE_ID, user: USER})
-	.then((result) => {
-		if (result.deletedCount > 0) {
+	const noteId = request.params.id;
+  const user = request.user._id;
+	try {
+	  const result = await Notes.deleteOne({ _id: noteId, user: user});
+		if (result.deletedCount) {
 			const deletedNote = {
 				success: true,
-				id: NOTE_ID,
+				id: noteId,
 			};
 			response.send(deletedNote);
-		}
-		else {
-			const err = new Error(ERROR_NO_MATCHES);
-			err.status = ERROR_STATUS;
+		}	else {
+			const err = new Error(ERROR_MESSAGES.noMatchNotes);
+			err.status = ERROR_STATUSES.badRequest;
 			next(err);
 		}
-	})
-	.catch((error) => {
+  }	catch(error) {
 		next(new Error(error));
-	});
+	};
 };
 
 export default DeleteNoteController;
