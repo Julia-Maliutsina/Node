@@ -13,8 +13,8 @@ const RefreshController = async (request, response, next) => {
       throw err;
     }
     const userId = await verifyRefreshToken(refreshToken);
-    const token = create.token(user);
-		const refresh = create.refreshToken(user);
+    const token = create.token(userId);
+		const refresh = create.refreshToken(userId);
 		response.status(200).json({token: token, refreshToken: refresh});
   }
 	catch(error){

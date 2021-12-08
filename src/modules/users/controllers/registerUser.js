@@ -4,6 +4,7 @@ import Users from "../models/UserModel.js";
 import create from "../../../helpers/createToken.js"
 
 const ERROR_STATUS = 400;
+const ERROR_REGISTRATION = "Incorrect email or password. Password must contain at least 1 number and 1 special caracter"
 const ERROR_EMAIL = "User with this email already exists";
 
 const RegisterController = async (request, response, next) => {
