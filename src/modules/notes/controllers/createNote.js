@@ -18,7 +18,11 @@ const CreateNoteController = async (request, response, next) => {
 		next(err);
 	} else {
 		try {
-		const note = await Notes.create({content: request.body.content, title: request.body.title,	createdAt: dateIso, user: request.user._id});
+		let title = request.body.title; 
+		if (process.env.NOTE_POSTFIX) {
+      title = title + ' ' + process.env.NOTE_POSTFIX;
+		}
+		const note = await Notes.create({content: request.body.content, title: title,	createdAt: dateIso, user: request.user._id});
 		response.send(note);
 		}	catch(error) {
 			next(new Error(error));

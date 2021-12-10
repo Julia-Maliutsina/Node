@@ -7,7 +7,7 @@ import routerUsers from "./src/modules/users/routes/index.js";
 import passport from "passport";
 import passportFindUser from "./src/passport.js";
 
-dotenv.config();
+dotenv.config({ path: `.${process.env.NODE_ENV}.env` });
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
