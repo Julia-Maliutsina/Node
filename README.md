@@ -36,3 +36,7 @@
 <a href="https://node-training-app-itech.herokuapp.com/api/notes"><p>Get notes - first page</p></a>
 <h5>Postman collection for all requests:</h5>
 <a href="https://go.postman.co/workspace/Julia-Maliutsina~b5ce7cf5-293e-4ced-8c11-d13fce3b5416/collection/18621131-8891f1f9-b5aa-4b1d-8837-375f2bd884ab"><p>Notes API requests with jwt.</p></a>
+
+<h3>Task 6</h3>
+<h5>Postman collection for post requests:</h5>
+<a href="https://go.postman.co/workspace/Julia-Maliutsina~b5ce7cf5-293e-4ced-8c11-d13fce3b5416/collection/18621131-087d5ff2-3f3b-4b63-acd3-1ecc9e11c0e2"><p>Post note requests to server running with .dev.env or .test.env</p></a>
